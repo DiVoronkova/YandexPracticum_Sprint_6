@@ -3,8 +3,6 @@ from selenium.webdriver.common.by import By
 
 class QuestionLocators:
 
-    QUESTIONS_TITLE = (By.XPATH, "//div[text() = 'Вопросы о важном']")
-
     QUESTIONS =[
         (By.ID, "accordion__heading-0"),
         (By.ID, "accordion__heading-1"),

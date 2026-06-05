@@ -7,7 +7,7 @@ class QuestionsPage(BasePage):
 
     URL = MAIN_URL
 
-    @allure.step('Прокрутить до заголовка Вопросы о важном')
+    @allure.step('Прокрутить до проверяемого вопроса')
     def scroll_to_questions(self, question):
         self.scroll_to_element(question)
 

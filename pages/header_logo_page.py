@@ -5,6 +5,7 @@ from url import MAIN_URL
 
 
 class LogoPage(BasePage):
+    
     URL = MAIN_URL
 
     @allure.step('Перейти на страницу заказа через кнопку Заказать в хедере')

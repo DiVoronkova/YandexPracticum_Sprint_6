@@ -12,7 +12,6 @@ class OrderLocators:
     SURNAME_FIELD = (By.XPATH,'//input[@placeholder="* Фамилия"]')
     ADDRESS_FIELD = (By.XPATH,'//input[@placeholder="* Адрес: куда привезти заказ"]')
     STATION__FIELD = (By.XPATH,'//input[@placeholder="* Станция метро"]')
-
     PHONE_FIELD = (By.XPATH,'//input[@placeholder="* Телефон: на него позвонит курьер"]')
     NEXT_BUTTON = (By.XPATH,'//button[text()="Далее"]')
 
