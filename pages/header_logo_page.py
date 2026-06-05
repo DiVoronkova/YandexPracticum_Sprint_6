@@ -3,6 +3,7 @@ from locators.header_logo_locators import LogoLocators
 from pages.base_page import BasePage
 from url import MAIN_URL
 
+
 class LogoPage(BasePage):
     URL = MAIN_URL
 

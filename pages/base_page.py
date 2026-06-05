@@ -14,7 +14,7 @@ class BasePage:
 
     @allure.step('Ожидать элемент по локатору: {locator}')
     def wait_for_element(self, locator):
-        return WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(locator))
+        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
     
     @allure.step('Нажать на элемент по локатору: {locator}')
     def click_element(self, locator):
@@ -23,8 +23,10 @@ class BasePage:
     @allure.step('Прокрутить элемент по локатору: {locator}')
     def scroll_to_element(self, locator):
         element = self.wait_for_element(locator)
-        return self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
-
+        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
+        return element
+    
     @allure.step('Заполнить поле по локатору: {locator}')
     def send_keys_to_field(self, locator, keys):
         field = self.wait_for_element(locator)
@@ -39,15 +41,12 @@ class BasePage:
     def get_current_url(self):
         return self.driver.current_url
     
-    @allure.step('Переключbnmcz на новую вкладку')
+    @allure.step('Переключиться на новую вкладку')
     def switch_to_next_tab(self):
         all_tabs = self.driver.window_handles
         self.driver.switch_to.window(all_tabs[-1])
 
-    @allure.step('Ожидаnm появления части url')
+    @allure.step('Ожидать появления части url')
     def wait_url_contains(self, url_part):
         return self.wait.until(EC.url_contains(url_part))
     
-    
-    
-   

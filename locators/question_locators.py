@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-class Question_Locators:
+class QuestionLocators:
 
     QUESTIONS_TITLE = (By.XPATH, "//div[text() = 'Вопросы о важном']")
 
