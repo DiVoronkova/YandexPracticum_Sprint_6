@@ -9,11 +9,6 @@ from helpers import generate_random_credentials
 class OrderPage(BasePage):
         
     URL = MAIN_URL
-
-    @allure.step('Принять cookie')
-    def accept_cookies(self):
-        if self.driver.find_element(*OrderLocators.COOKIE_BUTTON):
-            self.driver.find_element(*OrderLocators.COOKIE_BUTTON).click()
     
     @allure.step('Нажать на кнопку Заказать')
     def push_order_button(self, locator_order_button):
@@ -104,4 +99,7 @@ class OrderPage(BasePage):
         self.fill_in_rental_details(date, duration, colour_scooter, comment)
         self.wait_for_element(OrderLocators.YES_BUTTON)
         self.click_yes_button()
-        return self.wait_for_element(OrderLocators.ORDER_CONFIRMED_POPUP).is_displayed() 
+
+    @allure.step("Проверить отображение Popup")
+    def popup_is_displayed(self):
+        return self.is_element_displayed(OrderLocators.ORDER_CONFIRMED_POPUP)

@@ -26,10 +26,11 @@ def questions_page(driver):
 
 @pytest.fixture
 def order_page(driver):
-    o_page = OrderPage(driver)
-    o_page.open()
+    order_page = OrderPage(driver)
+    order_page.open()
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located(OrderLocators.HEADER_ORDER_BUTTON))
-    return o_page
+    order_page.accept_cookies()
+    return order_page
 
 @pytest.fixture
 def logo_page(driver):

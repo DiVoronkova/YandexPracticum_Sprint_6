@@ -2,6 +2,8 @@ import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from locators.order_locators import OrderLocators
+
 
 class BasePage:
     
@@ -12,20 +14,32 @@ class BasePage:
     @allure.step("Открыть страницу")
     def open(self):
         self.driver.get(self.URL)
+    
+    @allure.step('Принять cookie')
+    def accept_cookies(self):
+        if self.driver.find_element(*OrderLocators.COOKIE_BUTTON):
+            self.driver.find_element(*OrderLocators.COOKIE_BUTTON).click()
+
+    @allure.step("Проверить отображение элемента {locator}")
+    def is_element_displayed(self, locator):
+        try:
+            return self.wait_for_element(locator).is_displayed()
+        except:
+            return False
 
     @allure.step('Ожидать элемент по локатору: {locator}')
     def wait_for_element(self, locator):
-        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
+        return self.wait.until(EC.visibility_of_element_located(locator))
     
     @allure.step('Нажать на элемент по локатору: {locator}')
     def click_element(self, locator):
-        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator)).click()
+        return self.wait.until(EC.element_to_be_clickable(locator)).click()
 
     @allure.step('Прокрутить элемент по локатору: {locator}')
     def scroll_to_element(self, locator):
         element = self.wait_for_element(locator)
         self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
+        self.wait.until(EC.element_to_be_clickable(locator))
         return element
     
     @allure.step('Заполнить поле по локатору: {locator}')
@@ -49,5 +63,5 @@ class BasePage:
 
     @allure.step('Ожидать появления части url')
     def wait_url_contains(self, url_part):
-        return WebDriverWait(self.driver, 10).until(EC.url_contains(url_part))
+        return self.wait.until(EC.url_contains(url_part))
     
